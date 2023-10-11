@@ -1,6 +1,27 @@
 const http = require('http');
 
-const server = http.createServer();
+// call back
+// routing
+function handler(req, res) {
+    switch (req.url) {
+        case '/':
+            res.write('Hello Nodejs');
+            res.end();
+            break;
+
+        case '/products':
+            res.write('Products');
+            res.end();
+            break;
+
+        case '/home':
+            res.write('home');
+            res.end();
+            break;
+    }
+}
+
+const server = http.createServer(handler);
 
 const port = 3000;
 
