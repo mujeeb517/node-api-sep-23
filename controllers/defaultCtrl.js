@@ -19,4 +19,4 @@ class DefaultCtrl {
     }
 }
 
-module.exports = DefaultCtrl;
+module.exports = new DefaultCtrl();
