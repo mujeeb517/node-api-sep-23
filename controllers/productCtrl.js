@@ -12,11 +12,60 @@ const get = (req, res) => {
 
 const add = (req, res) => {
     const body = req.body;
-    products.push(body);
+    const { brand, model, price } = body;
 
-    res.status(201); // created
-    res.send('Created');
+    if (brand && model && price) {
+        products.push(body);
+
+        res.status(201); // created
+        res.send('Created');
+    } else {
+        res.status(400);
+        res.send('Brand, Model and Price fields are required');
+    }
 };
+
+function getById(req, res) {
+    const id = req.params.id;
+    let product = products.find(p => p.model == id);
+
+    // for (let i = 0; i < products.length; i++) {
+    //     if (products[i].id == id) {
+    //         product = products[i];
+    //         break;
+    //     }
+    // }
+
+    if (product) {
+        res.status(200);
+        res.json(product);
+    } else {
+        res.status(404);
+        res.send('Not found');
+    }
+}
+
+module.exports = {
+    get,
+    add,
+    getById,
+};
+
+
+// REST API
+// GET, POST, PUT, DELETE, PATCH
+// MongoDB (CRUD)
+// Mongoose (drivers)
+// pagination 
+// searching 
+// sorting 
+// authentication 
+// authorization RBAC
+// CI CD pipeline
+// Cloud Deployment
+// summary detail
+// 100 products
+// 1 product reviews, ratings, questions, offers
 
 /*
    id brand, model, price, instcok
@@ -38,11 +87,6 @@ const add = (req, res) => {
     Response headers: {}
     Body:{}
 */
-
-module.exports = {
-    get,
-    add
-};
 
 // module.exports = {
 //     get: get,
