@@ -7,6 +7,7 @@ router.get('/products', productCtrl.get);
 // POST http://localhost:3000/products
 router.post('/products', productCtrl.add);
 router.get('/products/:id', productCtrl.getById);
+router.delete('/products/:id', productCtrl.remove);
 
 module.exports = router;
 

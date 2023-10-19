@@ -26,8 +26,8 @@ const add = (req, res) => {
 };
 
 function getById(req, res) {
-    const id = req.params.id;
-    let product = products.find(p => p.model == id);
+    const id = +req.params.id;
+    let product = products.find(p => p.model === id);
 
     // for (let i = 0; i < products.length; i++) {
     //     if (products[i].id == id) {
@@ -45,13 +45,28 @@ function getById(req, res) {
     }
 }
 
+const remove = (req, res) => {
+    const id = +req.params.id;
+
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].id === id) {
+            products.splice(i, 1);
+            break;
+        }
+    }
+
+    res.status(204); // No Content
+    res.send();
+}
+
 module.exports = {
     get,
     add,
     getById,
+    remove,
 };
 
-
+// GET, POST, DELETE, PUT, PATCH
 // REST API
 // GET, POST, PUT, DELETE, PATCH
 // MongoDB (CRUD)
@@ -79,6 +94,8 @@ module.exports = {
 
 // GET http://loclhost:3000/products
 // POST http://loclhost:3000/products
+// CRUD
+// facebook post
 
 /*
     URL: http://localhost:3000/products
@@ -92,3 +109,6 @@ module.exports = {
 //     get: get,
 //     add: add
 // };
+
+// DELETE : http://localhost:3000/products/:id
+// BODY: -

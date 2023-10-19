@@ -7,7 +7,6 @@ const app = express();
 
 app.listen(3000, () => console.log('server is running on 3000!'));
 
-
 // www.example.com
 // products click 
 // ui -> GET: http://localhost/products
@@ -30,6 +29,5 @@ app.listen(3000, () => console.log('server is running on 3000!'));
 app.use(bodyParser.json());
 app.use('/', defaultRouter);
 app.use('/', productRouter);
-
 
 // index.js -> routes -> controllers
