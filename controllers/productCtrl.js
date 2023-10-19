@@ -27,7 +27,7 @@ const add = (req, res) => {
 
 function getById(req, res) {
     const id = +req.params.id;
-    let product = products.find(p => p.model === id);
+    let product = products.find(p => p.id === id);
 
     // for (let i = 0; i < products.length; i++) {
     //     if (products[i].id == id) {
@@ -59,14 +59,63 @@ const remove = (req, res) => {
     res.send();
 }
 
+const update = (req, res) => {
+    const id = +req.params.id;
+    const body = req.body;
+
+    const product = products.find(p => p.id === id);
+
+    product.brand = body.brand;
+    product.model = body.model;
+    product.price = body.price;
+    product.inStock = body.inStock;
+
+    res.status(204);
+    res.send('Updated');
+}
+
+const patch = (req, res) => {
+    const id = +req.params.id;
+    const { body } = req;
+
+    const product = products.find(p => p.id === id);
+    // reflection
+    for (let key in body) {
+        product[key] = body[key];
+        //ex: product.inStock = body.inStock
+    }
+
+    res.status(204);
+    res.send();
+}
+
 module.exports = {
     get,
     add,
     getById,
     remove,
+    update,
+    patch,
 };
 
+// Naukri.com
+// firstName, phoneNumber
+// personal details
+// educational details X, +2, Btech, PG
+// experience 
+
+// story or task or feature
+// analysis
+// PUT http://localhost:3000/products/:id
+// body: {brand, model,price,inStock}
+// 204 no content
+// req -> index.js -> routes -> controllers -> response
 // GET, POST, DELETE, PUT, PATCH
+// full update, all the fields, null
+// PATCH: partial updates
+// {brand, model,price,inStock}  brand: 'Apple', model: inStock:undefined
+// {brand, model,price,inStock}, {inStock:false}
+// 100s
 // REST API
 // GET, POST, PUT, DELETE, PATCH
 // MongoDB (CRUD)
@@ -97,7 +146,15 @@ module.exports = {
 // CRUD
 // facebook post
 
+// CRUD
+// Mongodb JS api
+// relational db
+
 /*
+    PATCH http://loclhost:3000/products/:id
+    payload: {inStock:true}
+    status: 204
+
     URL: http://localhost:3000/products
     VERB: GET/POST/PUT/DELETE
     Request headers:{}

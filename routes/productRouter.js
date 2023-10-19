@@ -2,12 +2,14 @@ const express = require('express');
 const productCtrl = require('../controllers/productCtrl');
 const router = express.Router();
 
-router.get('/products', productCtrl.get);
+router.get('/', productCtrl.get);
 // GET http://localhost:3000/products
-// POST http://localhost:3000/products
-router.post('/products', productCtrl.add);
-router.get('/products/:id', productCtrl.getById);
-router.delete('/products/:id', productCtrl.remove);
+// POST http://localhost:3000/api/products/:id
+router.post('/', productCtrl.add);
+router.get('/:id', productCtrl.getById);
+router.delete('/:id', productCtrl.remove);
+router.put('/:id', productCtrl.update);
+router.patch('/:id', productCtrl.patch);
 
 module.exports = router;
 
